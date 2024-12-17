@@ -1,34 +1,47 @@
 pipeline {
     agent any
-    
+
     tools {
-        maven 'Maven 3.9.9'  // Ensure Maven tool is properly configured in Jenkins
+        // Use the configured Maven tool, replace 'Maven 3.9.9' with your installed version name if necessary
+        maven 'Maven 3.9.9'
     }
-    
+
     stages {
-        stage('Checkout SCM') {
+        stage('Checkout') {
             steps {
-                checkout scm
+                // Clone your Git repository
+                git 'https://github.com/sathvika91/devopsint1.git'
             }
         }
         
-        stage('Build & Test') {
+        stage('Build') {
             steps {
-                echo 'Building and testing application using Jenkins tools...'
+                // Run Maven build command
+                echo 'Building...'
             }
         }
-        
+
+        stage('Test') {
+            steps {
+                // Run tests
+                echo 'Running....'
+            }
+        }
+
         stage('Deploy') {
             steps {
-                echo 'Deploying application using Jenkins...'
-                // Add deployment steps here if required
+                // Deploy application (update this with your actual deployment steps)
+                echo 'Deploying the application...'
             }
         }
-        
-        stage('Post Actions') {
-            steps {
-                echo 'Pipeline succeeded with Jenkins tools!'
-            }
+    }
+
+    post {
+        success {
+            echo 'Build completed successfully.'
+        }
+        failure {
+            echo 'Build failed.'
         }
     }
 }
