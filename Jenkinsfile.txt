@@ -17,21 +17,25 @@ pipeline {
         stage('Build') {
             steps {
                 // Run Maven build command
-                echo 'Building...'
+                echo 'Building the project...'
+                sh 'mvn clean install'  // Executes Maven build and test
             }
         }
 
         stage('Test') {
             steps {
-                // Run tests
-                echo 'Running....'
+                // Run unit tests
+                echo 'Running tests...'
+                sh 'mvn test'  // Run tests defined in the project
             }
         }
 
         stage('Deploy') {
             steps {
-                // Deploy application (update this with your actual deployment steps)
+                // Deploy application (add your actual deployment commands here)
                 echo 'Deploying the application...'
+                // Example of a deploy step, replace it with your actual deployment command
+                // sh 'docker deploy' or 'scp your-file user@host:/path'
             }
         }
     }
